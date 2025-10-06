@@ -1,0 +1,31 @@
+echo "
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules
+/node_modules
+
+# Build artifacts
+/build
+/dist
+/out
+/es
+/lib
+
+# Configuration files
+.env
+.env.*
+.DS_Store
+
+# IDE and Editor files
+.vscode
+*.sublime-project
+*.sublime-workspace
+" > .gitignore
