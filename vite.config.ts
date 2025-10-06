@@ -5,7 +5,7 @@
   import path from 'path';
 
   export default defineConfig({
-    base: '/Build-Documentation-Hub/',
+    base: '/Documentation-Hub/',
     plugins: [
       react(),
       mdx()
