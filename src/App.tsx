@@ -1,5 +1,7 @@
+'use client';
+
 import { Suspense, lazy } from "react";
-import { Routes, Route, NavLink, Link, Outlet } from "react-router-dom";
+import { Routes, Route, NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 
 import { Button } from "./components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./components/ui/sheet";
@@ -16,11 +18,17 @@ const InteractiveTutorial = lazy(() => import("./components/InteractiveTutorial"
 
 // Main App component to define routes
 export default function App() {
+  const navigate = useNavigate();
+
+  const handleStartTutorial = (tutorialId: number) => {
+    navigate(`/tutorials/${tutorialId}`);
+  };
+
   return (
     <Suspense fallback={<div className="flex justify-center items-center h-screen w-full">Loading...</div>}>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<TutorialLandingPage onStartTutorial={() => {}} />} />
+          <Route index element={<TutorialLandingPage onStartTutorial={handleStartTutorial} />} />
           <Route path="components" element={<ComponentShowcase />} />
           <Route path="accessibility" element={<AccessibilityGuide />} />
         </Route>

@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
@@ -146,18 +148,26 @@ export function TutorialLandingPage({ onStartTutorial }: TutorialLandingPageProp
               aria-label="Quick navigation to other documentation sections"
             >
               <h3 className="mb-2">Quick Links</h3>
-              <Button variant="outline" className="justify-start hover:border-blue-accent hover:text-blue-accent">
-                <Sparkles className="w-4 h-4 mr-2" /> API Documentation
-              </Button>
-              <Button variant="outline" className="justify-start hover:border-blue-accent hover:text-blue-accent">
-                <GitBranch className="w-4 h-4 mr-2" /> Workflow Examples
-              </Button>
-              <Button variant="outline" className="justify-start hover:border-blue-accent hover:text-blue-accent">
-                <Shield className="w-4 h-4 mr-2" /> Security Guide
-              </Button>
-              <Button variant="outline" className="justify-start hover:border-blue-accent hover:text-blue-accent">
-                <Code className="w-4 h-4 mr-2" /> Developer Tools
-              </Button>
+              <Link to="/components">
+                <Button variant="outline" className="justify-start hover:border-blue-accent hover:text-blue-accent w-full">
+                  <Sparkles className="w-4 h-4 mr-2" /> API Documentation
+                </Button>
+              </Link>
+              <Link to="/">
+                <Button variant="outline" className="justify-start hover:border-blue-accent hover:text-blue-accent w-full">
+                  <GitBranch className="w-4 h-4 mr-2" /> Workflow Examples
+                </Button>
+              </Link>
+              <Link to="/accessibility">
+                <Button variant="outline" className="justify-start hover:border-blue-accent hover:text-blue-accent w-full">
+                  <Shield className="w-4 h-4 mr-2" /> Security Guide
+                </Button>
+              </Link>
+              <Link to="/components">
+                <Button variant="outline" className="justify-start hover:border-blue-accent hover:text-blue-accent w-full">
+                  <Code className="w-4 h-4 mr-2" /> Developer Tools
+                </Button>
+              </Link>
             </nav>
           </div>
         </div>
