@@ -1,5 +1,3 @@
-'use client';
-
 import { Badge } from "./ui/badge";
 import { Card } from "./ui/card";
 import { Clock, PlayCircle, Video } from "lucide-react";

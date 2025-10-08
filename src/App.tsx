@@ -1,5 +1,3 @@
-'use client';
-
 import { Suspense, lazy } from "react";
 import { Routes, Route, NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 

@@ -5,7 +5,7 @@
   import "./index.css";
 
   createRoot(document.getElementById("root")!).render(
-    <BrowserRouter basename="/Documentation-Hub">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   );
