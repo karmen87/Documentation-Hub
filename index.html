@@ -1,5 +1,4 @@
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
   <html lang="en">
     <head>
       <meta charset="UTF-8" />
@@ -7,10 +6,19 @@
       <title>Documentation Hub</title>
     <script>
       (function(){
-        var redirect = sessionStorage.redirect;
+        const redirect = sessionStorage.redirect;
         delete sessionStorage.redirect;
         if (redirect && redirect != location.href) {
           history.replaceState(null, null, redirect);
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        const p = params.get('p');
+        if (p) {
+          const search = params.get('q') ? `?${params.get('q').replace(/~and~/g, '&')}` : '';
+          const hash = window.location.hash;
+          const newPath = `/${p.replace(/~and~/g, '&')${search}${hash}`;
+          history.replaceState(null, null, newPath);
         }
       })();
     </script>
@@ -22,4 +30,3 @@
       <div id="root"></div>
     </body>
   </html>
-  
