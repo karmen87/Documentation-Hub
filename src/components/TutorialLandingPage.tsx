@@ -7,7 +7,6 @@ import { TutorialSearchBar } from "./TutorialSearchBar";
 import { TutorialFilterDropdown, FilterOption } from "./TutorialFilterDropdown";
 import { Skeleton } from "./ui/skeleton";
 import { fetchTutorials, Tutorial } from "../api";
-import { QUICK_LINKS_DATA } from "../data/LamaticQuickLinks.js";
 import {
   BookOpen,
   Code,
@@ -89,15 +88,6 @@ export default function TutorialLandingPage({ onStartTutorial }: TutorialLanding
 
   const hasActiveFilters = selectedCategory !== "all" || selectedLevel !== "all" || searchQuery !== "";
 
-  const groupedQuickLinks = QUICK_LINKS_DATA.reduce((acc, link) => {
-    const { category } = link;
-    if (!acc[category]) {
-      acc[category] = [];
-    }
-    acc[category].push(link);
-    return acc;
-  }, {} as Record<string, typeof QUICK_LINKS_DATA>);
-
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -150,36 +140,40 @@ export default function TutorialLandingPage({ onStartTutorial }: TutorialLanding
                 </div>
               </div>
             </div>
+
+            {/* Quick Links */}
+            <nav 
+              className="hidden lg:flex flex-col gap-3 p-6 bg-white/80 dark:bg-card/80 backdrop-blur-sm rounded-xl border-2 border-border min-w-[280px]"
+              aria-label="Quick navigation to other documentation sections"
+            >
+              <h3 className="mb-2">Quick Links</h3>
+              <Link to="#">
+                <Button variant="outline" className="justify-start hover:border-blue-accent hover:text-blue-accent w-full">
+                  <Sparkles className="w-4 h-4 mr-2" /> API Documentation
+                </Button>
+              </Link>
+              <Link to="#">
+                <Button variant="outline" className="justify-start hover:border-blue-accent hover:text-blue-accent w-full">
+                  <GitBranch className="w-4 h-4 mr-2" /> Workflow Examples
+                </Button>
+              </Link>
+              <Link to="#">
+                <Button variant="outline" className="justify-start hover:border-blue-accent hover:text-blue-accent w-full">
+                  <Shield className="w-4 h-4 mr-2" /> Security Guide
+                </Button>
+              </Link>
+              <Link to="#">
+                <Button variant="outline" className="justify-start hover:border-blue-accent hover:text-blue-accent w-full">
+                  <Code className="w-4 h-4 mr-2" /> Developer Tools
+                </Button>
+              </Link>
+            </nav>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
       <main className="max-w-[1440px] mx-auto px-8 py-12">
-        {/* Lamatic.ai Essential Guides and Interfaces */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold tracking-tight mb-8">Lamatic.ai Essential Guides and Interfaces</h2>
-          {Object.entries(groupedQuickLinks).map(([category, links]) => (
-            <div key={category} className="mb-8">
-              <h3 className="text-2xl font-semibold border-b pb-2 mb-6">{category}</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {links.map((link) => (
-                  <a
-                    key={link.id}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-card border rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
-                  >
-                    <h4 className="font-bold text-lg mb-2">{link.title}</h4>
-                    <p className="text-sm text-muted-foreground">{link.description}</p>
-                  </a>
-                ))}
-              </div>
-            </div>
-          ))}
-        </section>
-
         {/* Search and Filters Section */}
         <section className="space-y-6 mb-12" aria-label="Search and filter tutorials">
           <div className="max-w-3xl">
