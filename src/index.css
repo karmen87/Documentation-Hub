@@ -2810,6 +2810,12 @@
     min-width: 44px;
     min-height: 44px;
   }
+
+  /* Fix for Lucide icons being too large */
+  .lucide {
+    display: inline-block;
+    vertical-align: middle;
+  }
 }
 
 :root {
