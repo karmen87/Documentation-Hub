@@ -26,7 +26,7 @@ interface TutorialLandingPageProps {
   onStartTutorial: (tutorialId: number) => void;
 }
 
-export function TutorialLandingPage({ onStartTutorial }: TutorialLandingPageProps) {
+export default function TutorialLandingPage({ onStartTutorial }: TutorialLandingPageProps) {
   // State for data fetching
   const [tutorials, setTutorials] = useState<Tutorial[]>([]);
   const [isLoading, setIsLoading] = useState(true);

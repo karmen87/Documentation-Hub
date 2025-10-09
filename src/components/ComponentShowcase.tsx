@@ -57,7 +57,7 @@ const filterOptions: FilterOption[] = [
   { value: "Advanced", label: "Advanced" },
 ];
 
-export function ComponentShowcase() {
+export default function ComponentShowcase() {
   const [levelFilter, setLevelFilter] = useState("all");
 
   const filteredTutorials =

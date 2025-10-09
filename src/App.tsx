@@ -11,7 +11,7 @@ import { GlobalSearchBar } from "./components/GlobalSearchBar";
 // Lazy load the page components
 const TutorialLandingPage = lazy(() => import("./components/TutorialLandingPage"));
 const ComponentShowcase = lazy(() => import("./components/ComponentShowcase"));
-import AccessibilityGuide from "./pages/AccessibilityGuide.mdx";
+const AccessibilityGuide = lazy(() => import("./pages/AccessibilityGuide.mdx"));
 const InteractiveTutorial = lazy(() => import("./components/InteractiveTutorial"));
 
 // Main App component to define routes
@@ -23,18 +23,20 @@ export default function App() {
   };
 
   return (
-    <Routes>
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<TutorialLandingPage onStartTutorial={handleStartTutorial} />} />
-        <Route path="components" element={<ComponentShowcase />} />
-        <Route path="accessibility" element={<AccessibilityGuide />} />
-      </Route>
-      <Route 
-        path="/tutorials/:tutorialId" 
-        element={<InteractiveTutorial tutorialId={0} onExit={() => window.history.back()} />} 
-      />
-      <Route path="*" element={<div>Page Not Found</div>} />
-    </Routes>
+    <Suspense fallback={<div className="flex justify-center items-center h-screen w-full">Loading...</div>}>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<TutorialLandingPage onStartTutorial={handleStartTutorial} />} />
+          <Route path="components" element={<ComponentShowcase />} />
+          <Route path="accessibility" element={<AccessibilityGuide />} />
+        </Route>
+        <Route 
+          path="/tutorials/:tutorialId" 
+          element={<InteractiveTutorial tutorialId={0} onExit={() => window.history.back()} />} 
+        />
+        <Route path="*" element={<div>Page Not Found</div>} />
+      </Routes>
+    </Suspense>
   );
 }
 

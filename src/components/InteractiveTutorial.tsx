@@ -137,7 +137,7 @@ interface InteractiveTutorialProps {
   onExit: () => void;
 }
 
-export function InteractiveTutorial({ tutorialId, onExit }: InteractiveTutorialProps) {
+export default function InteractiveTutorial({ tutorialId, onExit }: InteractiveTutorialProps) {
   const [currentStep, setCurrentStep] = useState(0);
   /** State to manage the non-developer mode, simplifying content */
   const [isNonDeveloperMode, setIsNonDeveloperMode] = useState(false);
