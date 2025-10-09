@@ -76,7 +76,7 @@ function MainLayout() {
                 <BookOpen className="w-6 h-6 text-accent-blue" />
               </div>
               <div>
-                <h1 className="text-base sm:text-lg font-semibold">Lamatic.ai Learning Hub</h1>
+                <h1 className="text-base sm:text-lg font-semibold">Documentation Hub</h1>
                 <p className="text-xs text-muted-foreground">
                   Documentation & Component Library
                 </p>

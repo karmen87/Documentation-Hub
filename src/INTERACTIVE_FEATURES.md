@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document outlines all interactive elements and accessibility features implemented in the Lamatic.ai Documentation & Tutorial Hub prototype.
+This document outlines all interactive elements and accessibility features implemented in the Documentation Hub prototype.
 
 ## Tutorial Cards - Interactive Elements
 

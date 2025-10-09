@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
@@ -101,7 +102,7 @@ export function TutorialLandingPage({ onStartTutorial }: TutorialLandingPageProp
                 <div className="p-3 bg-blue-accent rounded-xl shadow-lg">
                   <BookOpen className="w-8 h-8 text-white" />
                 </div>
-                <h1>Documentation & Tutorial Hub</h1>
+                <h1>Documentation Hub</h1>
               </div>
               <p className="text-muted-foreground text-lg mb-8">
                 Master Lamatic.ai with our comprehensive tutorials and guides. Learn at your own pace
