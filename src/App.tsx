@@ -43,13 +43,13 @@ function FixedGlobalSearchBar() {
   return (
     <form className="relative w-full">
       <div className="relative">
-        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-          <Search className="h-4 w-4 text-muted-foreground" />
+        <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+          <Search className="h-4 w-4 text-muted-foreground" /> 
         </div>
         <input
           type="search"
           placeholder="Search documentation..."
-          className="bg-muted/50 border border-border/40 rounded-md pl-10 pr-4 py-2 text-sm focus:ring-primary focus:border-primary w-full"
+          className="bg-muted/50 border border-border/40 rounded-md pl-9 pr-4 py-2 text-sm focus:ring-primary focus:border-primary w-full"
         />
       </div>
     </form>
