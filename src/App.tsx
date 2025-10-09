@@ -2,11 +2,9 @@ import { Suspense, lazy } from "react";
 import { Routes, Route, NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 
 import { Button } from "./components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "./components/ui/sheet";
-import { BookOpen, Layers, Accessibility, Menu } from "lucide-react";
-import { ThemeToggle } from "./components/ThemeToggle";
+import { Sheet, SheetContent, SheetTrigger } from "./components/ui/sheet"; 
+import { BookOpen, Layers, Accessibility, Menu, Github, Moon, Search } from "lucide-react";
 import { TableOfContents } from "./components/TableOfContents";
-import { GlobalSearchBar } from "./components/GlobalSearchBar";
 
 // Lazy load the page components
 const TutorialLandingPage = lazy(() => import("./components/TutorialLandingPage"));
@@ -40,6 +38,23 @@ export default function App() {
   );
 }
 
+// Fix 1: New search bar component with corrected icon positioning and size
+function FixedGlobalSearchBar() {
+  return (
+    <form className="relative w-full">
+      <div className="relative">
+        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <Search className="h-4 w-4 text-muted-foreground" />
+        </div>
+        <input
+          type="search"
+          placeholder="Search documentation..."
+          className="bg-muted/50 border border-border/40 rounded-md pl-10 pr-4 py-2 text-sm focus:ring-primary focus:border-primary w-full"
+        />
+      </div>
+    </form>
+  );
+}
 // Layout component including header, navigation, and content outlet
 function MainLayout() {
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -85,15 +100,23 @@ function MainLayout() {
 
             <div className="flex items-center gap-4 flex-1 justify-end">
               <div className="hidden sm:flex flex-1 justify-center max-w-md">
-                 <GlobalSearchBar />
+                 <FixedGlobalSearchBar />
               </div>
              
               {/* Desktop Navigation */}
               <nav className="hidden md:flex items-center gap-1">
                 {navLinks}
               </nav>
-
-              <ThemeToggle />
+              
+              {/* Fix 2: Functional Header Icons */}
+              <div className="flex items-center space-x-2">
+                <a href="https://github.com/Karmen87/Documentation-Hub/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground" aria-label="View source on GitHub">
+                  <Github className="h-5 w-5" />
+                </a>
+                <a href="#" onClick={() => window.toggleTheme()} className="text-muted-foreground hover:text-foreground" aria-label="Toggle theme">
+                  <Moon className="h-5 w-5" />
+                </a>
+              </div>
 
               {/* Mobile Navigation Trigger */}
               <div className="md:hidden">
@@ -106,7 +129,7 @@ function MainLayout() {
                   </SheetTrigger>
                   <SheetContent side="right">
                     <div className="p-4">
-                      <GlobalSearchBar />
+                      <FixedGlobalSearchBar />
                     </div>
                     <nav className="flex flex-col gap-4 px-4">
                       {navLinks}
