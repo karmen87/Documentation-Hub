@@ -98,12 +98,12 @@ function MainLayout() {
               </div>
             </Link>
 
-            <div className="flex items-center gap-4 flex-1 justify-end">
-              <div className="hidden sm:flex flex-1 justify-center max-w-md">
-                 <FixedGlobalSearchBar />
+            <div className="flex-1 flex justify-center px-4">
+              <div className="w-full max-w-md">
+                <FixedGlobalSearchBar />
               </div>
-             
-              {/* Desktop Navigation */}
+            </div>
+            <div className="flex items-center">
               <nav className="hidden md:flex items-center gap-1">
                 {navLinks}
               </nav>
