@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
+import { TutorialCard } from "./TutorialCard";
 import { TutorialSearchBar } from "./TutorialSearchBar";
 import { TutorialFilterDropdown, FilterOption } from "./TutorialFilterDropdown";
 import { Skeleton } from "./ui/skeleton";
@@ -32,6 +33,7 @@ export default function TutorialLandingPage({ onStartTutorial }: TutorialLanding
   const [error, setError] = useState<string | null>(null);
 
   // State for filtering and search
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedLevel, setSelectedLevel] = useState("all");
 
@@ -70,14 +72,18 @@ export default function TutorialLandingPage({ onStartTutorial }: TutorialLanding
 
   // Filtering logic
   const filteredTutorials = tutorials.filter((tutorial) => {
+    const matchesSearch =
+      tutorial.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      tutorial.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === "all" || tutorial.category === selectedCategory;
     const matchesLevel = selectedLevel === "all" || tutorial.level === selectedLevel;
-    return matchesCategory && matchesLevel;
+    return matchesSearch && matchesCategory && matchesLevel;
   });
 
   const handleClearFilters = () => {
     setSelectedCategory("all");
     setSelectedLevel("all");
+    setSearchQuery("");
   };
 
   const hasActiveFilters = selectedCategory !== "all" || selectedLevel !== "all" || searchQuery !== "";
@@ -170,6 +176,9 @@ export default function TutorialLandingPage({ onStartTutorial }: TutorialLanding
       <main className="max-w-[1440px] mx-auto px-8 py-12">
         {/* Search and Filters Section */}
         <section className="space-y-6 mb-12" aria-label="Search and filter tutorials">
+          <div className="max-w-3xl">
+            <TutorialSearchBar placeholder="Search tutorials by title, description, or topic..." onSearch={setSearchQuery} variant="prominent" />
+          </div>
           <div className="flex flex-wrap gap-4 items-center">
             <TutorialFilterDropdown label="Category" options={categoryOptions} value={selectedCategory} onChange={setSelectedCategory} variant="default" />
             <TutorialFilterDropdown label="Skill Level" options={levelOptions} value={selectedLevel} onChange={setSelectedLevel} variant="default" />
