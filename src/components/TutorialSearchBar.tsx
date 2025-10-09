@@ -57,9 +57,9 @@ export function TutorialSearchBar({
         <div className="relative flex-1">
           <Search
             className={`
-              absolute left-4 top-1/2 transform -translate-y-1/2 
+              absolute left-3 top-1/2 transform -translate-y-1/2 
               text-blue-accent
-              w-5 h-5
+              w-4 h-4
             `}
           />
           <Input
@@ -68,7 +68,7 @@ export function TutorialSearchBar({
             value={searchValue}
             onChange={handleChange}
             className={`
-              ${variant === "compact" ? "pl-10 pr-10" : variant === "prominent" ? "pl-14 pr-14" : "pl-12 pr-12"}
+              ${variant === "compact" ? "pl-10 pr-10" : variant === "prominent" ? "pl-10 pr-14" : "pl-12 pr-12"}
               ${getVariantClasses()}
               border-2 
               focus:border-blue-accent 
