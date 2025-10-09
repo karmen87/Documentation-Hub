@@ -1,4 +1,4 @@
-import{c as i,j as e,r as s,B as v}from"./index-Cr83z2tZ.js";import{X,B as m}from"./index-BUrF7RGL.js";import{T as k,a as Y}from"./TutorialFilterDropdown-D2ciMas_.js";import{c as I}from"./card-AOyQVKQJ.js";/**
+import{c as i,j as e,r as s,B as v}from"./index-CetXyqDx.js";import{X,B as m}from"./index-DljpSYai.js";import{T as k,a as Y}from"./TutorialFilterDropdown-AfHYp495.js";import{c as I}from"./card-BMt5ykzL.js";/**
  * @license lucide-react v0.487.0 - ISC
  *
  * This source code is licensed under the ISC license.
@@ -54,11 +54,11 @@ import{c as i,j as e,r as s,B as v}from"./index-Cr83z2tZ.js";import{X,B as m}fro
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */const Q=[["path",{d:"M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z",key:"1xq2db"}]],K=i("zap",Q);function ee({className:r,type:a,...g}){return e.jsx("input",{type:a,"data-slot":"input",className:I("file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border px-3 py-1 text-base bg-input-background transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm","focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]","aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",r),...g})}function te({placeholder:r="Search tutorials...",onSearch:a,onClear:g,defaultValue:n="",showSubmitButton:p=!1,variant:l="default"}){const[f,h]=s.useState(n),b=o=>{o.preventDefault(),a(f)},u=()=>{h(""),a(""),g?.()},w=o=>{h(o.target.value),p||a(o.target.value)},x=()=>{switch(l){case"compact":return"h-10";case"prominent":return"h-14 text-lg";default:return"h-12"}};return e.jsx("form",{onSubmit:b,className:"w-full",children:e.jsxs("div",{className:"relative flex items-center gap-2",children:[e.jsxs("div",{className:"relative flex-1",children:[e.jsx(z,{className:`
-              absolute left-4 top-1/2 transform -translate-y-1/2 
+              absolute left-3 top-1/2 transform -translate-y-1/2 
               text-blue-accent
-              w-5 h-5
+              w-4 h-4
             `}),e.jsx(ee,{type:"text",placeholder:r,value:f,onChange:w,className:`
-              ${l==="compact"?"pl-10 pr-10":l==="prominent"?"pl-14 pr-14":"pl-12 pr-12"}
+              ${l==="compact"?"pl-10 pr-10":l==="prominent"?"pl-10 pr-14":"pl-12 pr-12"}
               ${x()}
               border-2 
               focus:border-blue-accent 
