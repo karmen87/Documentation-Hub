@@ -2,8 +2,8 @@ import { Suspense, lazy } from "react";
 import { Routes, Route, NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 
 import { Button } from "./components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "./components/ui/sheet"; 
-import { BookOpen, Layers, Accessibility, Menu, Github, Moon, Search } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "./components/ui/sheet";
+import { BookOpen, Layers, Accessibility, Search } from "lucide-react";
 import { TableOfContents } from "./components/TableOfContents";
 
 // Lazy load the page components
@@ -108,35 +108,7 @@ function MainLayout() {
                 {navLinks}
               </nav>
               
-              {/* Fix 2: Functional Header Icons */}
-              <div className="flex items-center space-x-2">
-                <a href="https://github.com/Karmen87/Documentation-Hub/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground" aria-label="View source on GitHub">
-                  <Github className="h-5 w-5" />
-                </a>
-                <a href="#" onClick={() => window.toggleTheme()} className="text-muted-foreground hover:text-foreground" aria-label="Toggle theme">
-                  <Moon className="h-5 w-5" />
-                </a>
-              </div>
-
-              {/* Mobile Navigation Trigger */}
-              <div className="md:hidden">
-                <Sheet>
-                  <SheetTrigger asChild>
-                    <Button variant="outline" size="icon">
-                      <Menu className="h-6 w-6" />
-                      <span className="sr-only">Open menu</span>
-                    </Button>
-                  </SheetTrigger>
-                  <SheetContent side="right">
-                    <div className="p-4">
-                      <FixedGlobalSearchBar />
-                    </div>
-                    <nav className="flex flex-col gap-4 px-4">
-                      {navLinks}
-                    </nav>
-                  </SheetContent>
-                </Sheet>
-              </div>
+              {/* Icons removed as requested */}
             </div>
           </div>
         </div>
