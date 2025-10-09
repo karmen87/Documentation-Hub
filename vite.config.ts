@@ -7,8 +7,8 @@
   export default defineConfig({
     base: '/Documentation-Hub/',
     plugins: [
-      react(),
-      mdx()
+      mdx(),
+      react()
     ],
     resolve: {
       alias: {
