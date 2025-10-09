@@ -1,4 +1,4 @@
-import{j as e}from"./index-Dn2rQ0dQ.js";import{C as c,B as a}from"./card-CeJlIg5V.js";function i(t){const s={h1:"h1",h2:"h2",p:"p",...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(s.h1,{children:"Accessibility Features"}),`
+import{j as e}from"./index-DnbCjFxa.js";import{C as c,B as a}from"./card-npv5FuJx.js";function i(t){const s={h1:"h1",h2:"h2",p:"p",...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(s.h1,{children:"Accessibility Features"}),`
 `,e.jsx(s.p,{children:`Our Tutorial Hub is designed with accessibility in mind, following WCAG 2.1 AA standards
 to ensure all users can navigate and interact with content effectively.`}),`
 `,e.jsx(s.h2,{children:"Keyboard Navigation"}),`
