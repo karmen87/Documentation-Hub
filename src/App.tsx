@@ -3,7 +3,7 @@ import { Routes, Route, NavLink, Link, Outlet, useNavigate } from "react-router-
 
 import { Button } from "./components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./components/ui/sheet";
-import { BookOpen, Layers, Accessibility, Search } from "lucide-react";
+import { BookOpen, Layers, Accessibility } from "lucide-react";
 import { TableOfContents } from "./components/TableOfContents";
 
 // Lazy load the page components
@@ -38,23 +38,7 @@ export default function App() {
   );
 }
 
-// Fix 1: New search bar component with corrected icon positioning and size
-function FixedGlobalSearchBar() {
-  return (
-    <form className="relative w-full">
-      <div className="relative">
-        <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-          <Search className="lucide h-4 w-4 text-muted-foreground" />
-        </div>
-        <input
-          type="search"
-          placeholder="Search documentation..."
-          className="bg-muted/50 border border-border/40 rounded-md pl-9 pr-4 py-2 text-sm focus:ring-primary focus:border-primary w-full"
-        />
-      </div>
-    </form>
-  );
-}
+
 // Layout component including header, navigation, and content outlet
 function MainLayout() {
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -100,7 +84,6 @@ function MainLayout() {
 
             <div className="flex-1 flex justify-center px-4">
               <div className="w-full max-w-md">
-                <FixedGlobalSearchBar />
               </div>
             </div>
             <div className="flex items-center">

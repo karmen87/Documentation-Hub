@@ -59,7 +59,7 @@ export function TutorialSearchBar({
             className={`
               absolute left-4 top-1/2 transform -translate-y-1/2 
               text-blue-accent
-              ${variant === "compact" ? "w-4 h-4" : variant === "prominent" ? "w-6 h-6" : "w-5 h-5"}
+              w-5 h-5
             `}
           />
           <Input
