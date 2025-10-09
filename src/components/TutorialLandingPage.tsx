@@ -147,26 +147,26 @@ export default function TutorialLandingPage({ onStartTutorial }: TutorialLanding
               aria-label="Quick navigation to other documentation sections"
             >
               <h3 className="mb-2">Quick Links</h3>
-              <Link to="#">
+              <a href="https://lamatic.ai/docs/interface/graphql" target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" className="justify-start hover:border-blue-accent hover:text-blue-accent w-full">
                   <Sparkles className="w-4 h-4 mr-2" /> API Documentation
                 </Button>
-              </Link>
-              <Link to="#">
+              </a>
+              <a href="https://lamatic.ai/guides" target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" className="justify-start hover:border-blue-accent hover:text-blue-accent w-full">
                   <GitBranch className="w-4 h-4 mr-2" /> Workflow Examples
                 </Button>
-              </Link>
-              <Link to="#">
+              </a>
+              <a href="https://lamatic.ai/docs/security" target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" className="justify-start hover:border-blue-accent hover:text-blue-accent w-full">
                   <Shield className="w-4 h-4 mr-2" /> Security Guide
                 </Button>
-              </Link>
-              <Link to="#">
+              </a>
+              <a href="https://lamatic.ai/docs/mcp-tools/tools" target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" className="justify-start hover:border-blue-accent hover:text-blue-accent w-full">
                   <Code className="w-4 h-4 mr-2" /> Developer Tools
                 </Button>
-              </Link>
+              </a>
             </nav>
           </div>
         </div>
