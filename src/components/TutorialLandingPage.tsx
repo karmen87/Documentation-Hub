@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
 import { TutorialCard } from "./TutorialCard";
 import { TutorialSearchBar } from "./TutorialSearchBar";
 import { TutorialFilterDropdown, FilterOption } from "./TutorialFilterDropdown";
 import { Skeleton } from "./ui/skeleton";
-import { fetchTutorials, Tutorial } from "../api";
+import { TUTORIAL_DATA } from "../TUTORIAL_DATA.js";
+
 import {
   BookOpen,
   Code,
@@ -15,44 +15,41 @@ import {
   GraduationCap,
   TrendingUp,
   Award,
-  ArrowRight,
   Sparkles,
   Shield,
   GitBranch,
   AlertTriangle,
 } from "lucide-react";
 
+// Define the new type for our tutorial data
+interface Tutorial {
+  id: number;
+  title: string;
+  description: string;
+  duration: string;
+  level: "Beginner" | "Intermediate" | "Advanced";
+  category: string;
+  thumbnail: string;
+}
+
 interface TutorialLandingPageProps {
   onStartTutorial: (tutorialId: number) => void;
 }
 
 export default function TutorialLandingPage({ onStartTutorial }: TutorialLandingPageProps) {
-  // State for data fetching
-  const [tutorials, setTutorials] = useState<Tutorial[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  // Use the statically imported TUTORIAL_DATA
+  const [tutorials, setTutorials] = useState<Tutorial[]>(TUTORIAL_DATA);
+  
+  // Remove isLoading and error states as data is now static
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [error, setError] = useState<string | null>(null);
 
   // State for filtering and search
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedLevel, setSelectedLevel] = useState("all");
 
-  // Fetch data on component mount
-  useEffect(() => {
-    const loadTutorials = async () => {
-      try {
-        setIsLoading(true);
-        const data = await fetchTutorials();
-        setTutorials(data);
-      } catch (err) {
-        setError("Failed to load tutorials. Please try again later.");
-        console.error(err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    loadTutorials();
-  }, []);
+  // Remove the useEffect for fetching data
 
   // Memoized filter options to prevent re-calculation on every render
   const categoryOptions: FilterOption[] = [
@@ -117,7 +114,7 @@ export default function TutorialLandingPage({ onStartTutorial }: TutorialLanding
                   </div>
                   <div>
                     <div className="text-sm text-muted-foreground">Beginner</div>
-                    <div>{isLoading ? <Skeleton className="h-5 w-12" /> : `${tutorials.filter(t => t.level === "Beginner").length} tutorials`}</div>
+                    <div>{`${tutorials.filter(t => t.level === "Beginner").length} tutorials`}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
@@ -126,7 +123,7 @@ export default function TutorialLandingPage({ onStartTutorial }: TutorialLanding
                   </div>
                   <div>
                     <div className="text-sm text-muted-foreground">Intermediate</div>
-                    <div>{isLoading ? <Skeleton className="h-5 w-12" /> : `${tutorials.filter(t => t.level === "Intermediate").length} tutorials`}</div>
+                    <div>{`${tutorials.filter(t => t.level === "Intermediate").length} tutorials`}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
@@ -135,7 +132,7 @@ export default function TutorialLandingPage({ onStartTutorial }: TutorialLanding
                   </div>
                   <div>
                     <div className="text-sm text-muted-foreground">Advanced</div>
-                    <div>{isLoading ? <Skeleton className="h-5 w-12" /> : `${tutorials.filter(t => t.level === "Advanced").length} tutorials`}</div>
+                    <div>{`${tutorials.filter(t => t.level === "Advanced").length} tutorials`}</div>
                   </div>
                 </div>
               </div>
@@ -190,28 +187,13 @@ export default function TutorialLandingPage({ onStartTutorial }: TutorialLanding
         <div className="flex items-center justify-between mb-8">
           <div>
             <h2 id="tutorial-results-heading">{hasActiveFilters ? "Filtered Results" : "All Tutorials"}</h2>
-            {!isLoading && !error && <p className="text-muted-foreground mt-2">Showing {filteredTutorials.length} {filteredTutorials.length === 1 ? "tutorial" : "tutorials"}</p>}
+            <p className="text-muted-foreground mt-2">Showing {filteredTutorials.length} {filteredTutorials.length === 1 ? "tutorial" : "tutorials"}</p>
           </div>
         </div>
 
         {/* Content Grid - Handles Loading, Error, and Content states */}
         <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 pb-16" aria-labelledby="tutorial-results-heading">
-          {isLoading ? (
-            Array.from({ length: 6 }).map((_, index) => (
-              <div key={index} className="space-y-4">
-                <Skeleton className="h-48 w-full" />
-                <Skeleton className="h-6 w-3/4" />
-                <Skeleton className="h-4 w-full" />
-                <Skeleton className="h-4 w-1/2" />
-              </div>
-            ))
-          ) : error ? (
-            <div className="col-span-full text-center py-16 px-4 bg-red-50 dark:bg-red-950/20 rounded-lg">
-              <AlertTriangle className="w-12 h-12 mx-auto text-red-500" />
-              <h3 className="mt-4 text-red-600 dark:text-red-400">Error Loading Tutorials</h3>
-              <p className="text-red-500 dark:text-red-300 mt-2">{error}</p>
-            </div>
-          ) : filteredTutorials.length > 0 ? (
+          {filteredTutorials.length > 0 ? (
             filteredTutorials.map((tutorial) => (
               <TutorialCard key={tutorial.id} {...tutorial} onClick={() => onStartTutorial(tutorial.id)} />
             ))

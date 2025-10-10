@@ -1,9 +1,12 @@
-
 export const TUTORIAL_DATA = [
   {
     id: 1,
     title: "Getting Started with Lamatic.ai",
     description: "A beginner's guide to creating your first workflow, understanding the Flow Editor, and running a basic test.",
+    duration: "8 min",
+    level: "Beginner",
+    category: "Getting Started",
+    thumbnail: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b3JrZmxvd3xlbnwwfHx8fDE3MDk1MDAwMDB8MA&ixlib=rb-4.1.0&q=80&w=1080",
     steps: [
       {
         step_id: 1,
@@ -53,6 +56,10 @@ export const TUTORIAL_DATA = [
     id: 2,
     title: "Prompt Engineering for AI Flows",
     description: "Learn to create powerful and precise prompts using system roles, user inputs, and dynamic variables.",
+    duration: "12 min",
+    level: "Beginner",
+    category: "Workflows",
+    thumbnail: "https://images.unsplash.com/photo-1618422168439-4b03d3a05b15?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RpbmclMjB0dXRvcmlhbCUyMHNjcmVlbnxlbnwxfHx8fDE3NTk2OTYwNzV8MA&ixlib=rb-4.1.0&q=80&w=1080",
     steps: [
       {
         step_id: 1,
@@ -96,6 +103,10 @@ export const TUTORIAL_DATA = [
     id: 3,
     title: "Building a Basic LLM Chatbot",
     description: "Create a simple conversational chatbot that remembers previous messages using a Memory Node.",
+    duration: "15 min",
+    level: "Intermediate",
+    category: "Workflows",
+    thumbnail: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhaSUyMHRlY2hub2xvZ3l8ZW58MXx8fHwxNzU5Njk2MDc2fDA&ixlib=rb-4.1.0&q=80&w=1080",
     steps: [
       {
         step_id: 1,
@@ -145,6 +156,10 @@ export const TUTORIAL_DATA = [
     id: 4,
     title: "Implementing RAG for Knowledge Retrieval",
     description: "Enhance an LLM by connecting it to a knowledge base using a Vector Store and a RAG Node.",
+    duration: "25 min",
+    level: "Advanced",
+    category: "Data Management",
+    thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXRhJTIwYW5hbHl0aWNzJTIwZGFzaGJvYXJkfGVufDF8fHx8MTc1OTYwMDIzMXww&ixlib=rb-4.1.0&q=80&w=1080",
     steps: [
       {
         step_id: 1,
@@ -194,6 +209,10 @@ export const TUTORIAL_DATA = [
     id: 5,
     title: "Creating an AI Review Responder",
     description: "Automate responses to customer reviews by pulling data from a Google Sheet or external API.",
+    duration: "18 min",
+    level: "Intermediate",
+    category: "API Integration",
+    thumbnail: "https://images.unsplash.com/photo-1623282033815-40b05d96c903?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcGklMjBkZXZlbG9wbWVudHxlbnwxfHx8fDE3NTk2OTYwNzV8MA&ixlib=rb-4.1.0&q=80&w=1080",
     steps: [
       {
         step_id: 1,
@@ -237,6 +256,10 @@ export const TUTORIAL_DATA = [
     id: 6,
     title: "Generating Image Descriptions with Multimodal AI",
     description: "Use a Multimodal AI Node to analyze an image and generate a rich, descriptive caption.",
+    duration: "10 min",
+    level: "Intermediate",
+    category: "Workflows",
+    thumbnail: "https://images.unsplash.com/photo-1542744094-24638eff58bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b3JrZmxvdyUyMGF1dG9tYXRpb258ZW58MXx8fHwxNzU5NjYyNTQ0fDA&ixlib=rb-4.1.0&q=80&w=1080",
     steps: [
       {
         step_id: 1,
@@ -280,6 +303,10 @@ export const TUTORIAL_DATA = [
     id: 7,
     title: "Automated Product Identification from Images",
     description: "Build a workflow that takes an image, identifies products, and outputs structured JSON data.",
+    duration: "20 min",
+    level: "Advanced",
+    category: "Workflows",
+    thumbnail: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnaXQlMjB2ZXJzaW9ufGVufDB8fHx8MTcwOTUwMDAwMHww&ixlib=rb-4.1.0&q=80&w=1080",
     steps: [
       {
         step_id: 1,
@@ -329,6 +356,10 @@ export const TUTORIAL_DATA = [
     id: 8,
     title: "Building a Web Scraping Q&A System",
     description: "Scrape a website to build a knowledge base, then use RAG to answer questions about its content.",
+    duration: "30 min",
+    level: "Advanced",
+    category: "Data Management",
+    thumbnail: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBzY3JhcGluZ3xlbnwwfHx8fDE3MDk0OTk5OTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
     steps: [
       {
         step_id: 1,
@@ -378,6 +409,10 @@ export const TUTORIAL_DATA = [
     id: 9,
     title: "Creating a Real-time AI Currency Converter",
     description: "Use an API Node to fetch live exchange rates and a Code Node to perform the conversion.",
+    duration: "16 min",
+    level: "Intermediate",
+    category: "API Integration",
+    thumbnail: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXRhJTIwc3RyZWFtfGVufDB8fHx8MTcwOTUwMDAwMHww&ixlib=rb-4.1.0&q=80&w=1080",
     steps: [
       {
         step_id: 1,
@@ -427,6 +462,10 @@ export const TUTORIAL_DATA = [
     id: 10,
     title: "Developing an AI Email Summarizer",
     description: "Connect to a Gmail account using an App Node and use an LLM to summarize new emails.",
+    duration: "14 min",
+    level: "Intermediate",
+    category: "API Integration",
+    thumbnail: "https://images.unsplash.com/photo-1563986768609-322da13575f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjeWJlcnNlY3VyaXR5fGVufDB8fHx8MTcwOTUwMDAwMHww&ixlib=rb-4.1.0&q=80&w=1080",
     steps: [
       {
         step_id: 1,
@@ -470,6 +509,10 @@ export const TUTORIAL_DATA = [
     id: 11,
     title: "Automating Invoice Summarization to JSON",
     description: "Extract data from PDF invoices using the 'Extract from File' Node and structure it with the 'Generate JSON' Node.",
+    duration: "22 min",
+    level: "Advanced",
+    category: "Data Management",
+    thumbnail: "https://images.unsplash.com/photo-1566915896913-549d796d2166?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZXZlbG9wZXIlMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzU5Njc4NTcxfDA&ixlib=rb-4.1.0&q=80&w=1080",
     steps: [
       {
         step_id: 1,
@@ -513,6 +556,10 @@ export const TUTORIAL_DATA = [
     id: 12,
     title: "Designing an Agentic Blog Writer Workflow",
     description: "Create a sophisticated writing agent using a Supervisor Agent that manages multiple sub-agent Flows.",
+    duration: "28 min",
+    level: "Advanced",
+    category: "Workflows",
+    thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxkYXNoYm9hcmR8ZW58MHx8fHwxNzA5NTAwMDAwfDA&ixlib=rb-4.1.0&q=80&w=1080",
     steps: [
       {
         step_id: 1,
