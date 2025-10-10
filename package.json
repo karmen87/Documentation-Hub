@@ -1,5 +1,6 @@
 {
       "name": "Documentation Hub",
+      "homepage": "https://karmen87.github.io/Documentation-Hub",
       "version": "0.1.0",
       "private": true,
       "dependencies": {
