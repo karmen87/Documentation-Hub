@@ -63,7 +63,7 @@ export function TutorialCard({
   return (
     <Card
       className={`
-        overflow-hidden cursor-pointer transition-all duration-300 group border-2
+        overflow-hidden cursor-pointer transition-all duration-300 group border-2 border-4 border-red-500
         hover:shadow-xl hover:border-blue-accent
         focus-within:shadow-xl focus-within:border-blue-accent focus-within:ring-4 focus-within:ring-blue-accent/20
         ${isFocused ? "shadow-xl border-blue-accent ring-4 ring-blue-accent/20" : ""}
