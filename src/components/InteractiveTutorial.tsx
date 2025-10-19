@@ -44,6 +44,7 @@ export default function InteractiveTutorial({ tutorialId, onExit }: InteractiveT
         
         if (modules[path]) {
           const module: any = await modules[path]();
+          console.log("Loaded MDX module:", module);
           if (module.frontmatter && module.frontmatter.steps) {
             setTutorialSteps(module.frontmatter.steps);
           } else {
