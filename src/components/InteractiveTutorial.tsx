@@ -44,10 +44,10 @@ export default function InteractiveTutorial({ tutorialId, onExit }: InteractiveT
         
         if (modules[path]) {
           const module: any = await modules[path]();
-          if (module.steps) {
-            setTutorialSteps(module.steps);
+          if (module.frontmatter && module.frontmatter.steps) {
+            setTutorialSteps(module.frontmatter.steps);
           } else {
-            setError('Invalid tutorial format: `steps` array not found in front matter.');
+            setError('Invalid tutorial format: `steps` array not found in module.frontmatter.');
           }
         } else {
           setError(`Tutorial with ID ${tutorialId} not found.`);

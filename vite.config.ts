@@ -3,11 +3,13 @@
   import react from '@vitejs/plugin-react-swc';
   import mdx from '@mdx-js/rollup';
   import path from 'path';
+  import remarkFrontmatter from 'remark-frontmatter';
+  import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 
   export default defineConfig({
     base: '/Documentation-Hub/',
     plugins: [
-      mdx(),
+      mdx({ remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter] }),
       react()
     ],
     resolve: {
