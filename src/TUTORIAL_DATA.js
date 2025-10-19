@@ -54,8 +54,8 @@ export const TUTORIAL_DATA = [
   },
   {
     id: 2,
-    title: "Prompt Engineering for AI Flows",
-    description: "Learn to create powerful and precise prompts using system roles, user inputs, and dynamic variables.",
+    title: "Understanding Flow Triggers: Event vs. Batch Processing",
+    description: "Learn the foundational difference between Event and Batch triggers and how to apply them to initiate workflows based on single events or bulk data synchronization.",
     duration: "12 min",
     level: "Beginner",
     category: "Workflows",
@@ -63,39 +63,51 @@ export const TUTORIAL_DATA = [
     steps: [
       {
         step_id: 1,
-        header: "Understanding Prompt Structure",
-        default_text: "In a 'Generate Text' Node, prompts are typically structured with a System Role and a User Role. The System Role defines the AI's persona or high-level instruction, while the User Role provides the specific task or question.",
-        simplified_text: "Prompts have two parts: a System Role (AI's persona) and a User Role (your specific question)."
+        header: "Welcome to Triggers",
+        default_text: "Every single flow within Lamatic.ai must be initiated by a **Trigger Node**. This is the starting point that dictates when and how the workflow executes, whether it's an instantaneous reaction or a large-scale data sync.[1] Choosing the correct trigger type is the first critical architectural decision for any new GenAI application.",
+        simplified_text: "All Flows Require a Trigger Node. Defines Execution Timing and Input. First Critical Architectural Step."
       },
       {
         step_id: 2,
-        header: "Setting the System Role",
-        default_text: "In the 'Generate Text' Node's configuration, set the 'System Role' to define the AI's behavior. For example: 'You are a helpful assistant who speaks like a pirate.' This instruction will guide the tone of all future responses.",
-        simplified_text: "Set the 'System Role' to define the AI's personality, like 'You are a helpful pirate assistant.'"
+        header: "Defining the Event Trigger",
+        default_text: "The **Event Trigger** is designed for instantaneous, one-time execution.[2] It fires when a singular, specific action or event occurs in an integrated application. Since it processes only one item, the flow runs just once per trigger, making it perfect for real-time responses and immediate interactions, such as a user message or an API call.[2]",
+        simplified_text: "Initiated by a Single Event. Results in One-Time Execution. Ideal for Real-Time Responses."
       },
       {
         step_id: 3,
-        header: "Using Input Variables",
-        default_text: "To make your prompts dynamic, use variables from incoming data. In your 'API Trigger' Node, define a JSON input with a key like 'topic'. You can then reference this in your prompt using '{{input.topic}}'.",
-        simplified_text: "Use variables like '{{input.topic}}' in your prompt to insert data from a Trigger Node dynamically."
+        header: "Defining the Batch Trigger",
+        default_text: "In contrast, the **Batch Trigger** is used for processing large collections of data inputs, or batches.[2] When a batch process is initiated, the flow executes multiple times—once for every item contained within the batch.[2] This trigger is essential for scenarios involving bulk synchronization, data transformation pipelines, or tasks requiring volume processing.",
+        simplified_text: "Triggered by Batch Processing. Executes Multiple Times. One Run Per Item in the Batch."
       },
       {
         step_id: 4,
-        header: "Crafting a Dynamic User Prompt",
-        default_text: "Combine static text and variables in the 'User Role' field. For example: 'Write a short poem about {{input.topic}}.' When the Flow runs, the variable will be replaced with the actual data from the trigger.",
-        simplified_text: "Combine text and variables in the 'User Role' field, like: 'Write a poem about {{input.topic}}'."
+        header: "Event Trigger in Practice (Slack Example)",
+        default_text: "Consider a common Event Trigger use case: integrating with Slack.[2] A flow can be configured to start immediately when a new message is posted in a specific channel. The flow executes instantly to process that singular message, perhaps summarizing it using an AI Node, resulting in immediate, low-latency interaction.[2]",
+        simplified_text: "Example: New Message in Slack. Flow Executes Instantly and Once. Used for Low-Latency Interaction."
       },
       {
         step_id: 5,
-        header: "Adding Examples (Few-Shot Prompting)",
-        default_text: "Improve accuracy by providing examples directly in the prompt. Before your user question, you can add a section like 'Example: Q: What is the capital of France? A: Paris.' This technique, known as few-shot prompting, guides the model's output format.",
-        simplified_text: "Add examples in your prompt (few-shot prompting) to guide the AI's response format and style."
+        header: "Batch Trigger in Practice (PostgreSQL Example)",
+        default_text: "The Batch Trigger is best demonstrated by database integration, such as synchronizing new records from a PostgreSQL database.[2] If the sync pulls 100 new records, the Batch Trigger ensures your flow runs 100 individual times, allowing you to apply logic or transformation to each record independently. This ensures reliable data pipeline operations.[2]",
+        simplified_text: "Example: PostgreSQL Database Sync. Flow Runs Multiple Times (e.g., 100). Used for ETL Data Pipelines."
       },
       {
         step_id: 6,
-        header: "Testing with Different Inputs",
-        default_text: "Use the 'Test Flow' feature to send different JSON payloads to your API Trigger. Observe how the 'Generate Text' Node uses the variables to produce different outputs, allowing you to refine your prompt for robustness.",
-        simplified_text: "Test your Flow with different inputs to see how the dynamic prompt works and refine it as needed."
+        header: "Connecting Triggers to Action Nodes",
+        default_text: "The output generated by the Trigger Node must be passed sequentially to the next component, known as the **Action Node**.[1] Action nodes perform the actual work—like calling the Generate Text AI Node or connecting to an external API.[1] By chaining these nodes, you ensure the trigger's data output is correctly fed into the subsequent processing steps.",
+        simplified_text: "Trigger Output Feeds Action Nodes. Action Nodes Perform Core Processing. Maintain Sequential Logical Order."
+      },
+      {
+        step_id: 7,
+        header: "Concluding with the Final Node",
+        default_text: "All successful flow executions should conclude with a **Final Node**.[1] This component is essential for formatting and sending the flow's ultimate output back to the initiating system, especially for requests that began with GraphQL or Chat Widget integrations.[1] This step closes the execution loop and delivers the result to the end-user or connected application.",
+        simplified_text: "Final Step of the Flow. Sends Output to External System. Completes API or Widget Request."
+      },
+      {
+        step_id: 8,
+        header: "Tutorial Complete!",
+        default_text: "You have now mastered the fundamental difference between Event and Batch triggers, providing you with the essential knowledge to architect complex, high-performance flows. You are now ready to proceed to the next tutorial to learn how to manage the Lamatic Studio interface and set up your projects.",
+        simplified_text: "Triggers Mastered. Event: One Time Execution. Batch: Multiple Executions. Next: Studio Navigation and Project Management."
       }
     ]
   },
@@ -106,7 +118,7 @@ export const TUTORIAL_DATA = [
     duration: "15 min",
     level: "Intermediate",
     category: "Workflows",
-    thumbnail: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhaSUyMHRlY2hub2xvZ3l8ZW58MXx8fHwxNzU5Njk2MDc2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    thumbnail: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcGklMjB0dXRvcmlhbCUyMHNjcmVlbnxlbnwxfHx8fDE3NTk2OTYwNzZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
     steps: [
       {
         step_id: 1,
@@ -470,7 +482,7 @@ export const TUTORIAL_DATA = [
       {
         step_id: 1,
         header: "Use a Scheduler or Webhook Trigger",
-        default_text: "Start your Flow with a 'Scheduler' to check for emails every 15 minutes, or use a 'Webhook' Trigger if your email service supports it for real-time updates.",
+        default_text: "Start your Flow with a 'Scheduler' to check for emails every 15 minutes, or use a 'Webhook' if your email service supports it for real-time updates.",
         simplified_text: "Use a 'Scheduler' or 'Webhook' Trigger to start the Flow when a new email arrives."
       },
       {
