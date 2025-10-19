@@ -5,8 +5,8 @@ layout: tutorial_slide
 tutorial_number: 1
 steps:
   - step_number: 1
-    step_title: "Accessing Lamatic Studio and Initiating a New Flow"
-    narrator_script: "Begin the process by navigating to the Lamatic.ai Studio, the designated platform for managing, building, and deploying all GenAI projects.[1] Within the Studio, access the **Flow Management** section. Click the option labeled **"Create a New Flow"** to initiate the graphical workflow building process.[1] The Studio is the primary Visual Layer interface, allowing both technical and non-technical developers to configure the system and define the sequence of operations for their project.[1]"
+    step_title: "Welcome to Lamatic Studio"
+    narrator_script: "Begin the process by navigating to the Lamatic.ai Studio, the designated platform for managing, building, and deploying all GenAI projects.[1] Within the Studio, access the **Flow Management** section. Click the option labeled **\"Create a New Flow\"** to initiate the graphical workflow building process.[1] The Studio is the primary Visual Layer interface, allowing both technical and non-technical developers to configure the system and define the sequence of operations for their project.[1]"
     on_screen_text:
       - "Central Platform: Lamatic Studio"
       - "Navigate to Flow Management"
@@ -63,4 +63,12 @@ steps:
       - "Use Edge Deployments for Performance"
       - "Access via GraphQL API / Widgets"
     action_visual_cue: "Transition from the Flow Editor to the Deployments section and show the \"Deploy\" button being clicked."
+  - step_number: 8
+    step_title: "Tutorial Complete!"
+    narrator_script: "Congratulations on building and deploying your first flow! You have successfully navigated the Lamatic Studio, configured your action nodes, and verified the output using the debugging tools. You are now ready to proceed to the next tutorial to deepen your understanding of flow triggers and advanced logic nodes."
+    on_screen_text:
+      - "Flow Successfully Tested and Deployed"
+      - "Next: Flow Triggers and Logic Nodes"
+      - "Continue Your Learning Journey"
+    action_visual_cue: "Display an encouraging completion screen with a link to the next tutorial."
 ---
