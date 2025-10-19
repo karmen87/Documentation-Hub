@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Progress } from "./ui/progress";
 import { Badge } from "./ui/badge";
@@ -11,126 +11,17 @@ import {
   CheckCircle2,
   Circle,
   X,
-  Lightbulb,
-  AlertCircle,
   BrainCircuit,
 } from "lucide-react";
 
+// Updated interface to match the MDX front matter structure
 interface TutorialStep {
-  id: number;
-  title: string;
-  content: string;
-  /** Optional simplified content for non-developer mode */
-  content_simple?: string;
-  annotation?: string;
-  tip?: string;
-  warning?: string;
-  highlightArea?: {
-    top: string;
-    left: string;
-    width: string;
-    height: string;
-  };
+  step_number: number;
+  step_title: string;
+  narrator_script: string;
+  on_screen_text: string[];
+  action_visual_cue: string;
 }
-
-const tutorialSteps: TutorialStep[] = [
-  {
-    id: 1,
-    title: "Welcome to Lamatic.ai",
-    content:
-      "Welcome! This interactive tutorial will guide you through creating your first AI-powered workflow. You'll learn how to set up nodes, connect them, and deploy your workflow in just a few minutes.",
-    content_simple:
-      "Welcome! Let's build your first automated task. We'll show you how to add steps, connect them, and turn your task on.",
-    tip: "Take your time with each step. You can always go back if you need to review something.",
-  },
-  {
-    id: 2,
-    title: "Understanding the Workflow Canvas",
-    content:
-      "The workflow canvas is where you'll build your AI workflows. You can drag and drop nodes, connect them, and configure each step. The canvas supports zooming, panning, and snapping to grid for precision.",
-    content_simple:
-      "This is your workspace. You can add steps, connect them, and arrange them however you like.",
-    annotation: "This is your main workspace where all the magic happens",
-    highlightArea: {
-      top: "20%",
-      left: "10%",
-      width: "80%",
-      height: "60%",
-    },
-  },
-  {
-    id: 3,
-    title: "Adding Your First Node",
-    content:
-      "Nodes are the building blocks of your workflow. Click the '+' button or use the right-click menu to add a new node. Start with an 'Input' node to receive data into your workflow.",
-    content_simple:
-      "Steps in your task are called 'nodes'. Click the '+' button to add your first one. A good first step is an 'Input' to get things started.",
-    tip: "You can search for nodes by typing in the add menu to quickly find what you need.",
-    highlightArea: {
-      top: "15%",
-      left: "45%",
-      width: "10%",
-      height: "10%",
-    },
-  },
-  {
-    id: 4,
-    title: "Connecting Nodes",
-    content:
-      "To connect nodes, click and drag from the output port (right side) of one node to the input port (left side) of another. Connections determine how data flows through your workflow.",
-    content_simple:
-      "Connect your steps by dragging a line from the right side of one step to the left side of another. This shows how your task will run.",
-    warning: "Make sure the data types match when connecting nodes to avoid errors.",
-    highlightArea: {
-      top: "30%",
-      left: "30%",
-      width: "40%",
-      height: "40%",
-    },
-  },
-  {
-    id: 5,
-    title: "Configuring Node Settings",
-    content:
-      "Each node has its own configuration panel. Click on a node to open its settings. Here you can customize parameters, set up API keys, and define how the node processes data.",
-    content_simple:
-      "Each step has settings. Click a step to see them. Here you can tell the step exactly what to do.",
-    annotation: "Configuration panel appears on the right side",
-    highlightArea: {
-      top: "10%",
-      left: "70%",
-      width: "25%",
-      height: "80%",
-    },
-  },
-  {
-    id: 6,
-    title: "Testing Your Workflow",
-    content:
-      "Before deploying, it's important to test your workflow. Click the 'Test Run' button to execute your workflow with sample data. Monitor the execution in real-time and check the output of each node.",
-    content_simple:
-      "Before you turn your task on, it's a good idea to test it. Click 'Test Run' to see it in action with some example data.",
-    tip: "Use the debug mode to see detailed logs and intermediate results from each step.",
-  },
-  {
-    id: 7,
-    title: "Deploying Your Workflow",
-    content:
-      "Once your workflow is tested and ready, click the 'Deploy' button to make it live. You'll get a unique API endpoint that you can use to trigger your workflow from anywhere.",
-    content_simple:
-      "When you're happy with your task, click 'Deploy' to turn it on. You'll get a special link you can use to start your task automatically.",
-    tip: "Set up environment variables for API keys and sensitive data before deploying to production.",
-  },
-  {
-    id: 8,
-    title: "Tutorial Complete!",
-    content:
-      "Congratulations! You've completed the tutorial. You now know the basics of creating, testing, and deploying AI workflows with Lamatic.ai. Explore our documentation for advanced features and best practices.",
-    content_simple:
-      "Great job! You've finished the tutorial and now know how to build and run tasks in Lamatic.ai. Check out our other guides to learn even more.",
-    tip: "Check out our API Integration tutorial next to learn how to connect external services.",
-  },
-];
 
 interface InteractiveTutorialProps {
   tutorialId: number;
@@ -138,10 +29,40 @@ interface InteractiveTutorialProps {
 }
 
 export default function InteractiveTutorial({ tutorialId, onExit }: InteractiveTutorialProps) {
+  const [tutorialSteps, setTutorialSteps] = useState<TutorialStep[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState(0);
-  /** State to manage the non-developer mode, simplifying content */
   const [isNonDeveloperMode, setIsNonDeveloperMode] = useState(false);
-  const progress = ((currentStep + 1) / tutorialSteps.length) * 100;
+
+  useEffect(() => {
+    const loadTutorial = async () => {
+      try {
+        setIsLoading(true);
+        const modules = import.meta.glob('../pages/quickstart-*.mdx');
+        const path = `../pages/quickstart-0${tutorialId}.mdx`;
+        
+        if (modules[path]) {
+          const module: any = await modules[path]();
+          if (module.steps) {
+            setTutorialSteps(module.steps);
+          } else {
+            setError('Invalid tutorial format: `steps` array not found in front matter.');
+          }
+        } else {
+          setError(`Tutorial with ID ${tutorialId} not found.`);
+        }
+      } catch (e) {
+        setError('Failed to load tutorial content.');
+        console.error(e);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadTutorial();
+  }, [tutorialId]);
+
+  const progress = tutorialSteps.length > 0 ? ((currentStep + 1) / tutorialSteps.length) * 100 : 0;
   const step = tutorialSteps[currentStep];
 
   const handleNext = () => {
@@ -159,6 +80,18 @@ export default function InteractiveTutorial({ tutorialId, onExit }: InteractiveT
   const handleStepClick = (index: number) => {
     setCurrentStep(index);
   };
+
+  if (isLoading) {
+    return <div className="flex justify-center items-center h-screen w-full">Loading Tutorial...</div>;
+  }
+
+  if (error) {
+    return <div className="flex justify-center items-center h-screen w-full">Error: {error}</div>;
+  }
+
+  if (!step) {
+    return <div className="flex justify-center items-center h-screen w-full">No steps available for this tutorial.</div>;
+  }
 
   return (
     <div className="min-h-screen bg-background relative">
@@ -204,7 +137,7 @@ export default function InteractiveTutorial({ tutorialId, onExit }: InteractiveT
               <div className="space-y-3">
                 {tutorialSteps.map((s, index) => (
                   <button
-                    key={s.id}
+                    key={s.step_number}
                     onClick={() => handleStepClick(index)}
                     className={`w-full flex items-start gap-3 p-4 rounded-lg text-left transition-all duration-200 border-2 ${
                       index === currentStep
@@ -220,7 +153,7 @@ export default function InteractiveTutorial({ tutorialId, onExit }: InteractiveT
                       <Circle className={`w-5 h-5 flex-shrink-0 mt-0.5 ${index === currentStep ? "text-white" : "text-muted-foreground"}`} />
                     )}
                     <div className="flex-1 min-w-0">
-                      <div className="text-sm truncate">{s.title}</div>
+                      <div className="text-sm truncate">{s.step_title}</div>
                     </div>
                   </button>
                 ))}
@@ -230,74 +163,6 @@ export default function InteractiveTutorial({ tutorialId, onExit }: InteractiveT
 
           {/* Tutorial Content and Demo Area */}
           <div className="lg:col-span-3 space-y-6">
-            {/* Mock Workflow Canvas with Overlay */}
-            <div className="relative bg-muted rounded-lg overflow-hidden" style={{ height: "400px" }}>
-              {/* Simulated Canvas Background */}
-              <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-              
-              {/* Mock workflow elements */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-muted-foreground/50">
-                  <svg width="400" height="300" viewBox="0 0 400 300">
-                    <defs>
-                      <pattern
-                        id="grid"
-                        width="20"
-                        height="20"
-                        patternUnits="userSpaceOnUse"
-                      >
-                        <path
-                          d="M 20 0 L 0 0 0 20"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="0.5"
-                        />
-                      </pattern>
-                    </defs>
-                    <rect width="400" height="300" fill="url(#grid)" />
-                    {/* Mock nodes */}
-                    <rect x="50" y="120" width="80" height="60" rx="8" fill="currentColor" opacity="0.2" />
-                    <rect x="170" y="120" width="80" height="60" rx="8" fill="currentColor" opacity="0.2" />
-                    <rect x="290" y="120" width="80" height="60" rx="8" fill="currentColor" opacity="0.2" />
-                    {/* Mock connections */}
-                    <line x1="130" y1="150" x2="170" y2="150" stroke="currentColor" strokeWidth="2" opacity="0.3" />
-                    <line x1="250" y1="150" x2="290" y2="150" stroke="currentColor" strokeWidth="2" opacity="0.3" />
-                  </svg>
-                </div>
-              </div>
-
-              {/* Highlight Overlay */}
-              {step.highlightArea && (
-                <div
-                  className="absolute border-4 rounded-lg animate-pulse shadow-2xl"
-                  style={{
-                    top: step.highlightArea.top,
-                    left: step.highlightArea.left,
-                    width: step.highlightArea.width,
-                    height: step.highlightArea.height,
-                    borderColor: "var(--blue-accent)",
-                    backgroundColor: "rgba(0, 123, 255, 0.15)",
-                    boxShadow: "0 0 0 4px rgba(0, 123, 255, 0.2)",
-                  }}
-                />
-              )}
-
-              {/* Annotation Callout */}
-              {step.annotation && (
-                <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
-                  <div className="bg-blue-accent text-white px-6 py-3 rounded-lg shadow-xl max-w-md border-2 border-blue-accent-dark">
-                    <div className="flex items-center gap-2">
-                      <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                      <span className="text-sm">{step.annotation}</span>
-                    </div>
-                    {/* Arrow pointer */}
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-accent rotate-45" />
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Step Content Card */}
             <Card className="p-8 border-2 shadow-lg">
               <div className="space-y-6">
                 <div className="flex justify-between items-start">
@@ -305,9 +170,8 @@ export default function InteractiveTutorial({ tutorialId, onExit }: InteractiveT
                     <Badge className="mb-4 bg-blue-accent text-white hover:bg-blue-accent-dark">
                       Step {currentStep + 1} of {tutorialSteps.length}
                     </Badge>
-                    <h2 className="mb-4">{step.title}</h2>
+                    <h2 className="mb-4">{step.step_title}</h2>
                   </div>
-                  {/* Non-Developer Mode Toggle */}
                   <div className="flex items-center space-x-2 p-2 rounded-lg bg-muted/50">
                     <BrainCircuit className="w-5 h-5 text-blue-accent" />
                     <Label htmlFor="non-dev-mode" className="cursor-pointer">
@@ -323,30 +187,21 @@ export default function InteractiveTutorial({ tutorialId, onExit }: InteractiveT
                 </div>
 
                 <p className="text-muted-foreground leading-relaxed">
-                  {isNonDeveloperMode && step.content_simple
-                    ? step.content_simple
-                    : step.content}
+                  {step.narrator_script}
                 </p>
 
-                {step.tip && (
-                  <div className="flex gap-3 p-4 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-900">
-                    <Lightbulb className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <div className="text-blue-900 dark:text-blue-100 mb-1">💡 Tip</div>
-                      <p className="text-blue-800 dark:text-blue-200">{step.tip}</p>
-                    </div>
-                  </div>
-                )}
+                <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                    <h4 className="font-semibold mb-2">On-Screen Text:</h4>
+                    <ul className="list-disc list-inside text-muted-foreground">
+                        {step.on_screen_text.map((point, i) => <li key={i}>{point}</li>)}
+                    </ul>
+                </div>
 
-                {step.warning && (
-                  <div className="flex gap-3 p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg border border-amber-200 dark:border-amber-900">
-                    <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <div className="text-amber-900 dark:text-amber-100 mb-1">⚠️ Warning</div>
-                      <p className="text-amber-800 dark:text-amber-200">{step.warning}</p>
-                    </div>
-                  </div>
-                )}
+                <div className="p-4 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg">
+                    <h4 className="font-semibold mb-2">Visual Cue:</h4>
+                    <p className="text-muted-foreground">{step.action_visual_cue}</p>
+                </div>
+
               </div>
             </Card>
 

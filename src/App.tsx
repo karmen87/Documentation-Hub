@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react";
-import { Routes, Route, NavLink, Link, Outlet, useNavigate } from "react-router-dom";
+import { Routes, Route, NavLink, Link, Outlet, useNavigate, useParams } from "react-router-dom";
 
 import { Button } from "./components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./components/ui/sheet";
@@ -11,6 +11,13 @@ const TutorialLandingPage = lazy(() => import("./components/TutorialLandingPage"
 const ComponentShowcase = lazy(() => import("./components/ComponentShowcase"));
 const AccessibilityGuide = lazy(() => import("./pages/AccessibilityGuide.mdx"));
 const InteractiveTutorial = lazy(() => import("./components/InteractiveTutorial"));
+
+// Wrapper component to extract tutorialId from URL
+const InteractiveTutorialWrapper = () => {
+  const { tutorialId } = useParams();
+  const id = tutorialId ? parseInt(tutorialId, 10) : 0;
+  return <InteractiveTutorial tutorialId={id} onExit={() => window.history.back()} />;
+};
 
 // Main App component to define routes
 export default function App() {
@@ -30,7 +37,7 @@ export default function App() {
         </Route>
         <Route 
           path="/tutorials/:tutorialId" 
-          element={<InteractiveTutorial tutorialId={0} onExit={() => window.history.back()} />} 
+          element={<InteractiveTutorialWrapper />} 
         />
         <Route path="*" element={<div>Page Not Found</div>} />
       </Routes>
